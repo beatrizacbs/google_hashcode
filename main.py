@@ -23,7 +23,7 @@ class Slide:
 pictures = []
 slides = []
 
-file_name = "e_shiny_selfies.txt"
+file_name = "a_example.txt"
 
 
 def read_file():
@@ -47,6 +47,31 @@ def read_file():
                 slides.append(slide)
             else:
                 pictures.append(pic)
+
+
+def create_relationVertical():
+    for v in range(0, len(pictures), 1):
+        greaterintersection = 0
+        currentIntersec = 0
+        currentId = 0
+        for v2 in range(0, len(pictures), 1):
+            if v != v2:
+                p1 = set(pictures[v].tags)
+                p2 = set(pictures[v2].tags)
+                currentIntersec = len(p1.intersection(p2))
+                if currentIntersec > greaterintersection:
+                    currentId = v2
+                    greaterintersection = currentIntersec
+
+        picRelation = [pictures[v], pictures[v2]]
+        slideRelation = Slide(picRelation, p1.union(p2))
+        slides.append(slideRelation)
+        pictures.remove(pictures[v2])
+        pictures.remove(pictures[v])
+        
+
+
+
 
 
 def create_slides():
@@ -83,6 +108,6 @@ def write_file():
 
 
 read_file()
-create_slides()
+create_relationVertical()
 create_relation()
 write_file()
