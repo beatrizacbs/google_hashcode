@@ -23,7 +23,7 @@ class Slide:
 pictures = []
 slides = []
 
-file_name = "a_example.txt"
+file_name = "e_shiny_selfies.txt"
 
 
 def read_file():
@@ -61,12 +61,13 @@ def create_slides():
 
 def create_relation():
     for i in range(0, len(slides), 2):
-        slide1 = slides[i].tags
-        slide2 = slides[i+1].tags
-        intersec = len(slide1.intersection(slide2))
-        sld1sld2 = len(slide1.difference(slide2))
-        sld2sld1 = len(slide2.difference(slide1))
-        value_min = min(intersec, sld1sld2, sld2sld1)
+        if i + 1 < len(slides):
+            slide1 = slides[i].tags
+            slide2 = slides[i+1].tags
+            intersec = len(slide1.intersection(slide2))
+            sld1sld2 = len(slide1.difference(slide2))
+            sld2sld1 = len(slide2.difference(slide1))
+            value_min = min(intersec, sld1sld2, sld2sld1)
 
 
 def write_file():
